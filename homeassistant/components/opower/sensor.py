@@ -28,7 +28,7 @@ from .coordinator import OpowerConfigEntry, OpowerCoordinator
 class OpowerEntityDescription(SensorEntityDescription):
     """Class describing Opower sensors entities."""
 
-    value_fn: Callable[[Forecast], str | float]
+    value_fn: Callable[[Forecast], str | float | date]
 
 
 # suggested_display_precision=0 for all sensors since
@@ -96,7 +96,7 @@ ELEC_SENSORS: tuple[OpowerEntityDescription, ...] = (
         device_class=SensorDeviceClass.DATE,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        value_fn=lambda data: str(data.start_date),
+        value_fn=lambda data: data.start_date,
     ),
     OpowerEntityDescription(
         key="elec_end_date",
@@ -104,7 +104,7 @@ ELEC_SENSORS: tuple[OpowerEntityDescription, ...] = (
         device_class=SensorDeviceClass.DATE,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        value_fn=lambda data: str(data.end_date),
+        value_fn=lambda data: data.end_date,
     ),
 )
 GAS_SENSORS: tuple[OpowerEntityDescription, ...] = (
@@ -168,7 +168,7 @@ GAS_SENSORS: tuple[OpowerEntityDescription, ...] = (
         device_class=SensorDeviceClass.DATE,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        value_fn=lambda data: str(data.start_date),
+        value_fn=lambda data: data.start_date,
     ),
     OpowerEntityDescription(
         key="gas_end_date",
@@ -176,7 +176,7 @@ GAS_SENSORS: tuple[OpowerEntityDescription, ...] = (
         device_class=SensorDeviceClass.DATE,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        value_fn=lambda data: str(data.end_date),
+        value_fn=lambda data: data.end_date,
     ),
 )
 
